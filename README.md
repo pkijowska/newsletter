@@ -1,6 +1,6 @@
-# newsletter
+# newsletter :computer:
 
-[x] Express
-[x] Body Parser
-[x] Javascript
-[x] Bootstrap
+:boom: Express
+:boom: Body Parser
+:boom: Javascript
+:boom: Bootstrap
