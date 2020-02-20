@@ -1,8 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
+require('dotenv').config();
 
 const app = express();
+
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -38,14 +40,17 @@ app.post("/", function(req, res){
 
   var jsonData = JSON.stringify(data);
   console.log(jsonData);
+  var api_key = process.env.API_KEY;
+
   var options = {
     url: "https://us4.api.mailchimp.com/3.0/lists/e1bb5cc754",
     method: "POST",
     headers: {
-      "Authorization": "paula1 444d098d88f23d36c17e357b84ac4fcb-us4"
+      "Authorization": "paula1 "+api_key
     },
     body: jsonData
   };
+
 
   request(options, function(error, response, body){
     if (error) {
@@ -54,15 +59,9 @@ app.post("/", function(req, res){
       if (response.statusCode === 200) {
         res.sendFile(__dirname + "/success.html");
       }else {
+        console.log(response.statusCode);
         res.send("there was an error with signing up, please try again")
       }
     }
   });
-
-
-
 });
-
-
-// 444d098d88f23d36c17e357b84ac4fcb-us4
-// e1bb5cc754
